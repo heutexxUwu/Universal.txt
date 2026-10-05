@@ -13,7 +13,7 @@ local Section = Tab:AddSection({
 
 
 Tab:AddButton({
-	Name = "Chams",
+	Name = "Chams(Teams)",
 	Callback = function()
       		print("button pressed")-- LocalScript
 -- Colócalo en StarterPlayer > StarterPlayerScripts
@@ -84,7 +84,7 @@ Players.PlayerAdded:Connect(setupPlayer)
 
 
 Tab:AddButton({
-	Name = "Chams (Bright Blue)",
+	Name = "Chams (Blue)",
 	Callback = function()
       		print("button pressed")
 		local Players = game:GetService("Players")
@@ -126,6 +126,54 @@ local function onPlayerAdded(player)
 	end
 	player.CharacterAdded:Connect(function(character)
 		applyHighlight(player, character)
+	end)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+	onPlayerAdded(player)
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+
+  	end    
+})
+
+
+Tab:AddButton({
+	Name = "Chams (White)",
+	Callback = function()
+      		print("button pressed")
+local Players = game:GetService("Players")
+
+local PLAYER_COLOR = Color3.fromHex("#ffffff")
+
+local function applyHighlight(character)
+	if not character:IsDescendantOf(workspace) then
+		character.AncestryChanged:Wait()
+	end
+	
+	local oldHighlight = character:FindFirstChildOfClass("Highlight")
+	if oldHighlight then
+		oldHighlight:Destroy()
+	end
+	
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "PlayerHighlight"
+	
+	highlight.FillColor = PLAYER_COLOR
+	highlight.OutlineColor = PLAYER_COLOR
+	highlight.FillTransparency = 0.4
+	highlight.OutlineTransparency = 0
+	highlight.Adornee = character
+	highlight.Parent = character
+end
+
+local function onPlayerAdded(player)
+	if player.Character then
+		applyHighlight(player.Character)
+	end
+	player.CharacterAdded:Connect(function(character)
+		applyHighlight(character)
 	end)
 end
 
@@ -188,7 +236,7 @@ Players.PlayerAdded:Connect(onPlayerAdded)
 
 
 Tab:AddButton({
-	Name = "Bright yellow green",
+	Name = "Green",
 	Callback = function()
       		print("button pressed")local Players = game:GetService("Players")
 
@@ -232,6 +280,55 @@ Players.PlayerAdded:Connect(onPlayerAdded)
 
   	end    
 })
+
+
+Tab:AddButton({
+	Name = "Chams(Purple)",
+	Callback = function()
+      		print("button pressed")
+local Players = game:GetService("Players")
+
+local PLAYER_COLOR = Color3.fromHex("##6112ff")
+
+local function applyHighlight(character)
+	if not character:IsDescendantOf(workspace) then
+		character.AncestryChanged:Wait()
+	end
+	
+	local oldHighlight = character:FindFirstChildOfClass("Highlight")
+	if oldHighlight then
+		oldHighlight:Destroy()
+	end
+	
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "PlayerHighlight"
+	
+	highlight.FillColor = PLAYER_COLOR
+	highlight.OutlineColor = PLAYER_COLOR
+	highlight.FillTransparency = 0.4
+	highlight.OutlineTransparency = 0
+	highlight.Adornee = character
+	highlight.Parent = character
+end
+
+local function onPlayerAdded(player)
+	if player.Character then
+		applyHighlight(player.Character)
+	end
+	player.CharacterAdded:Connect(function(character)
+		applyHighlight(character)
+	end)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+	onPlayerAdded(player)
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+
+  	end    
+})
+
 
 
 local Tab = Window:MakeTab({
