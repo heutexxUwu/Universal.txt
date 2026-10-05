@@ -1,0 +1,285 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Autumn unu :p", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Chams",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Esp"
+})
+
+
+Tab:AddButton({
+	Name = "Chams",
+	Callback = function()
+      		print("button pressed")-- LocalScript
+-- Colócalo en StarterPlayer > StarterPlayerScripts
+
+local Players = game:GetService("Players")
+
+local localPlayer = Players.LocalPlayer
+
+local function updateHighlight(player, character)
+	if not character then
+		return
+	end
+
+	-- Eliminar highlight anterior
+	local oldHighlight = character:FindFirstChild("TeamHighlight")
+	if oldHighlight then
+		oldHighlight:Destroy()
+	end
+
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "TeamHighlight"
+	highlight.Adornee = character
+	highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	highlight.FillTransparency = 0.5
+	highlight.OutlineTransparency = 0
+	highlight.Parent = character
+
+	-- Color basado en el Team
+	if player.Team then
+		highlight.FillColor = player.Team.TeamColor.Color
+		highlight.OutlineColor = player.Team.TeamColor.Color
+	else
+		-- Color por defecto si no tiene Team
+		highlight.FillColor = Color3.fromRGB(255, 255, 255)
+		highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+	end
+end
+
+local function setupPlayer(player)
+	-- Cuando aparece el personaje
+	player.CharacterAdded:Connect(function(character)
+		updateHighlight(player, character)
+	end)
+
+	-- Si ya tiene personaje
+	if player.Character then
+		updateHighlight(player, player.Character)
+	end
+
+	-- Actualizar si cambia de Team
+	player:GetPropertyChangedSignal("Team"):Connect(function()
+		if player.Character then
+			updateHighlight(player, player.Character)
+		end
+	end)
+end
+
+-- Jugadores actuales
+for _, player in ipairs(Players:GetPlayers()) do
+	setupPlayer(player)
+end
+
+-- Jugadores que entren después
+Players.PlayerAdded:Connect(setupPlayer)
+
+  	end    
+})
+
+
+Tab:AddButton({
+	Name = "Chams (Bright Blue)",
+	Callback = function()
+      		print("button pressed")
+		local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local PLAYER_COLOR = Color3.fromHex("#0ac6f0")
+local AI_SPECIAL_COLOR = Color3.fromHex("#0ac6f0")
+
+local function applyHighlight(player, character)
+	if not character:IsDescendantOf(workspace) then
+		character.AncestryChanged:Wait()
+	end
+	
+	local oldHighlight = character:FindFirstChildOfClass("Highlight")
+	if oldHighlight then
+		oldHighlight:Destroy()
+	end
+	
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "PlayerHighlight"
+	
+	if player == LocalPlayer then
+		highlight.FillColor = AI_SPECIAL_COLOR
+		highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+	else
+		highlight.FillColor = PLAYER_COLOR
+		highlight.OutlineColor = PLAYER_COLOR
+	end
+	
+	highlight.FillTransparency = 0.4
+	highlight.OutlineTransparency = 0
+	highlight.Adornee = character
+	highlight.Parent = character
+end
+
+local function onPlayerAdded(player)
+	if player.Character then
+		applyHighlight(player, player.Character)
+	end
+	player.CharacterAdded:Connect(function(character)
+		applyHighlight(player, character)
+	end)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+	onPlayerAdded(player)
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+
+  	end    
+})
+
+
+Tab:AddButton({
+	Name = "Chams (Magenta)",
+	Callback = function()
+      		print("button pressed")
+		local Players = game:GetService("Players")
+
+local PLAYER_COLOR = Color3.fromHex("#fc03ad")
+
+local function applyHighlight(character)
+	if not character:IsDescendantOf(workspace) then
+		character.AncestryChanged:Wait()
+	end
+	
+	local oldHighlight = character:FindFirstChildOfClass("Highlight")
+	if oldHighlight then
+		oldHighlight:Destroy()
+	end
+	
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "PlayerHighlight"
+	
+	highlight.FillColor = PLAYER_COLOR
+	highlight.OutlineColor = PLAYER_COLOR
+	highlight.FillTransparency = 0.4
+	highlight.OutlineTransparency = 0
+	highlight.Adornee = character
+	highlight.Parent = character
+end
+
+local function onPlayerAdded(player)
+	if player.Character then
+		applyHighlight(player.Character)
+	end
+	player.CharacterAdded:Connect(function(character)
+		applyHighlight(character)
+	end)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+	onPlayerAdded(player)
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+
+  	end    
+})
+
+
+Tab:AddButton({
+	Name = "Bright yellow green",
+	Callback = function()
+      		print("button pressed")local Players = game:GetService("Players")
+
+local PLAYER_COLOR = Color3.fromHex("#c0f752")
+
+local function applyHighlight(character)
+	if not character:IsDescendantOf(workspace) then
+		character.AncestryChanged:Wait()
+	end
+	
+	local oldHighlight = character:FindFirstChildOfClass("Highlight")
+	if oldHighlight then
+		oldHighlight:Destroy()
+	end
+	
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "PlayerHighlight"
+	
+	highlight.FillColor = PLAYER_COLOR
+	highlight.OutlineColor = PLAYER_COLOR
+	highlight.FillTransparency = 0.4
+	highlight.OutlineTransparency = 0
+	highlight.Adornee = character
+	highlight.Parent = character
+end
+
+local function onPlayerAdded(player)
+	if player.Character then
+		applyHighlight(player.Character)
+	end
+	player.CharacterAdded:Connect(function(character)
+		applyHighlight(character)
+	end)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+	onPlayerAdded(player)
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+
+  	end    
+})
+
+
+local Tab = Window:MakeTab({
+	Name = "Combat",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+Tab:AddButton({
+	Name = "Hitbox (Legit)",
+	Callback = function()
+      		print("button pressed")
+-- LocalScript para StarterPlayerScripts
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Configuración requerida
+local HITBOX_SIZE = 5 -- Puedes cambiar este valor entre 1 y 25 según prefieras
+local HITBOX_COLOR = Color3.fromHex("#c0f752") -- Color solicitado
+
+-- Función para aplicar la hitbox a un personaje
+local function applyHitbox(character, player)
+	if player == LocalPlayer then return end -- No modificarse a uno mismo
+
+	local rootPart = character:WaitForChild("HumanoidRootPart", 5)
+	if rootPart and rootPart:IsA("BasePart") then
+		-- Ajustar las propiedades de la hitbox
+		rootPart.Size = Vector3.new(HITBOX_SIZE, HITBOX_SIZE, HITBOX_SIZE)
+		rootPart.Color = HITBOX_COLOR
+		rootPart.Transparency = 0.6 -- Transparente para que sea visible pero no tape todo
+		rootPart.Material = Enum.Material.Neon -- Efecto brillante para resaltar el color
+		rootPart.CanCollide = false -- Evita que choques físicamente con la hitbox gigante
+	end
+end
+
+-- Bucle constante para asegurar que las hitboxes se mantengan aplicadas
+RunService.RenderStepped:Connect(function()
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer and player.Character then
+			applyHitbox(player.Character, player)
+		end
+	end
+end)
+
+  	end    
+})
+
+
+OrionLib:Init()
